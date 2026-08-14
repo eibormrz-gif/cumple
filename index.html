@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños, Mi Amor! ❤️</title>
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Dancing+Script:wght@600;700&family=Montserrat:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+    <style>
+        /* Usamos Alex Brush como respaldo ya que la otra fuente no está disponible */
+        .secret-message {
+            font-family: 'Alex Brush', cursive;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: radial-gradient(circle at center, #2b0813 0%, #120207 100%);
+            color: #fce4ec;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 15px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        #heartCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .card-container {
+            position: relative;
+            z-index: 2;
+            max-width: 580px;
+            width: 100%;
+            background: linear-gradient(145deg, rgba(45, 12, 24, 0.95), rgba(20, 4, 10, 0.98));
+            border-radius: 28px;
+            padding: 35px 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6),
+                        0 0 30px rgba(233, 30, 99, 0.25),
+                        inset 0 0 15px rgba(255, 215, 0, 0.15);
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            animation: cardAppear 1.2s ease-out forwards;
+        }
+
+        @keyframes cardAppear {
+            0% { opacity: 0; transform: translateY(30px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .photo-frame {
+            position: relative;
+            width: 100%;
+            max-width: 360px;
+            margin: 0 auto 25px auto;
+            padding: 10px;
+            background: linear-gradient(135deg, #d4af37, #fff8dc, #aa771c, #d4af37);
+            border-radius: 22px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5),
+                        0 0 20px rgba(212, 175, 55, 0.4);
+            animation: frameGlow 4s infinite alternate;
+        }
+
+        @keyframes frameGlow {
+            0% { box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 15px rgba(212, 175, 55, 0.3); }
+            100% { box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 30px rgba(233, 30, 99, 0.6); }
+        }
+
+        .photo-wrapper {
+            position: relative;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #800f2f;
+        }
+
+        .photo-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 16px;
+            transition: transform 0.8s ease;
+        }
+
+        .photo-wrapper:hover img {
+            transform: scale(1.04);
+        }
+
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: #ffd700;
+            text-shadow: 0 0 12px rgba(255, 215, 0, 0.5), 2px 2px 4px rgba(0, 0, 0, 0.8);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .letter-box {
+            background: rgba(255, 255, 255, 0.04);
+            border-left: 3px solid #d4af37;
+            border-right: 3px solid #d4af37;
+            border-radius: 16px;
+            padding: 22px 18px;
+            margin-bottom: 25px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.3);
+            text-align: left;
+        }
+
+        .letter-text {
+            font-size: 0.98rem;
+            line-height: 1.8;
+            color: #fff0f5;
+            font-weight: 300;
+            white-space: pre-line;
+        }
+
+        .letter-text p {
+            margin-bottom: 14px;
+        }
+
+        .surprise-btn {
+            background: linear-gradient(135deg, #ff4d6d, #c9184a);
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4);
+            transition: all 0.3s ease;
+            outline: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .surprise-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.6);
+            background: linear-gradient(135deg, #ff758f, #ff4d6d);
+        }
+
+        .secret-message {
+            display: none;
+            margin-top: 20px;
+            padding: 18px 15px;
+            background: rgba(212, 175, 55, 0.15);
+            border-radius: 12px;
+            border: 1px dashed #d4af37;
+            color: #ffe6a7;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer-decor {
+            margin-top: 20px;
+            font-size: 1.3rem;
+            letter-spacing: 5px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 480px) {
+            .card-container {
+                padding: 25px 18px;
+            }
+            .title {
+                font-size: 2.3rem;
+            }
+            .secret-message {
+                font-size: 1.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="heartCanvas"></canvas>
+
+    <div class="card-container">
+        <div class="photo-frame">
+            <div class="photo-wrapper">
+                                <img src="C:\Users\eibor\OneDrive\Desktop\cumpleaños\IMG-20260801-WA0001.jpg" alt="Nosotros juntos">
+
+</div>
+        </div>
+
+        <h1 class="title">¡Feliz Cumpleaños, Mi Amor! ❤️</h1>
+
+        <div class="letter-box">
+            <div class="letter-text">
+                <p>Primero que nada feliz cumpleaños para mi novia linda, espero que seas muy feliz a mi lado y quería agradecerte por todo lo que hemos pasado juntos ya sea bueno o malo pero lo que me hace feliz es que lo pasé a tu lado, quiero decirte que me haces súper feliz y que eres una niña súper inteligente, linda y con una forma de ser que me encanta.</p>
+                
+                <p>Me encanta que seas muy atenta conmigo y que me tratas muy bien, siempre la paso de lo mejor cuando estoy contigo y no importa qué hagamos siempre seré feliz a tu lado, hay veces que no sabemos qué hacer pero al final siempre terminamos pasándola increíble.</p>
+                
+                <p>Cada momento a tu lado es una experiencia diferente que me hace sentir que soy demasiado importante en tu vida y es lo que me gusta de ti, que me haces sentir muy bien.</p>
+            </div>
+        </div>
+
+        <button class="surprise-btn" onclick="lanzarSorpresa()">
+            <span>✨ Toca aquí para ver tu promesa ✨</span>
+        </button>
+
+        <div class="secret-message" id="secretMessage">
+            ¡Prometo hacerte sonreír hoy y siempre! 🎉🎂💖
+        </div>
+
+        <div class="footer-decor">💖 ✨ 🎂 ✨ 💖</div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('heartCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        class Heart {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = height + Math.random() * 100;
+                this.size = Math.random() * 12 + 8;
+                this.speed = Math.random() * 1.5 + 0.8;
+                this.opacity = Math.random() * 0.6 + 0.3;
+                this.swing = Math.random() * 0.05;
+                this.swingAngle = Math.random() * Math.PI * 2;
+                this.color = `hsla(${Math.random() * 30 + 330}, 85%, 65%, ${this.opacity})`;
+            }
+
+            update() {
+                this.y -= this.speed;
+                this.swingAngle += this.swing;
+                this.x += Math.sin(this.swingAngle) * 0.8;
+
+                if (this.y < -20) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.beginPath();
+                ctx.fillStyle = this.color;
+                
+                let topCurveHeight = this.size * 0.3;
+                ctx.moveTo(0, topCurveHeight);
+                ctx.bezierCurveTo(0, 0, -this.size / 2, 0, -this.size / 2, topCurveHeight);
+                ctx.bezierCurveTo(-this.size / 2, (this.size + topCurveHeight) / 2, 0, this.size, 0, this.size);
+                ctx.bezierCurveTo(0, this.size, this.size / 2, (this.size + topCurveHeight) / 2, this.size / 2, topCurveHeight);
+                ctx.bezierCurveTo(this.size / 2, 0, 0, 0, 0, topCurveHeight);
+                
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        const hearts = Array.from({ length: 35 }, () => new Heart());
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            hearts.forEach(heart => {
+                heart.update();
+                heart.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        function lanzarSorpresa() {
+            const secretMsg = document.getElementById('secretMessage');
+            secretMsg.style.display = 'block';
+
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const h = new Heart();
+                    h.y = height / 2 + 100;
+                    h.x = width / 2 + (Math.random() - 0.5) * 200;
+                    h.speed = Math.random() * 3 + 2;
+                    hearts.push(h);
+                }, i * 50);
+            }
+        }
+    </script>
+</body>
+</html>
+
